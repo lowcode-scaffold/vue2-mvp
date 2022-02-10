@@ -7,7 +7,8 @@ import {
   Button,
   Form,
   Input,
-  Tag
+  Tag,
+  Divider
 } from "ant-design-vue";
 import usePresenter from "./presenter";
 import styles from "./index.module.scss";
@@ -43,16 +44,8 @@ const Index = defineComponent({
       {
         title: "tags",
         dataIndex: "tags",
-        key: "tags"
-        // customRender(data) {
-        //   return data.value.map((s: string) => {
-        //     return (
-        //       <Tag color="blue" key={s}>
-        //         {s}
-        //       </Tag>
-        //     );
-        //   });
-        // }
+        key: "tags",
+        scopedSlots: { customRender: "tags" }
       },
       {
         title: "住址",
@@ -63,30 +56,8 @@ const Index = defineComponent({
       {
         title: "Action",
         key: "action",
-        width: 200
-        // customRender(data) {
-        //   return (
-        //     <span>
-        //       <Button
-        //         type="link"
-        //         onClick={() => {
-        //           presenter.handelEdit(data.record);
-        //         }}
-        //       >
-        //         编辑
-        //       </Button>
-        //       <Button
-        //         type="link"
-        //         danger
-        //         onClick={() => {
-        //           presenter.handleDel(data.record);
-        //         }}
-        //       >
-        //         删除
-        //       </Button>
-        //     </span>
-        //   );
-        // }
+        width: 200,
+        scopedSlots: { customRender: "action" }
       }
     ];
     return { model, presenter, culumns };
@@ -143,15 +114,54 @@ const Index = defineComponent({
             dataSource={this.model.userList}
             loading={this.model.loading}
             pagination={false}
-          />
+            scopedSlots={{
+              tags: (value: string[]) => {
+                return value.map(s => {
+                  return (
+                    <Tag key={s} color="blue">
+                      {s}
+                    </Tag>
+                  );
+                });
+              },
+              action: (data: any) => {
+                return (
+                  <span>
+                    <Button
+                      type="link"
+                      onClick={() => {
+                        this.presenter.handelEdit(data);
+                      }}
+                    >
+                      编辑
+                    </Button>
+                    <Button
+                      type="link"
+                      style={{ color: "red" }}
+                      onClick={() => {
+                        this.presenter.handleDel(data);
+                      }}
+                    >
+                      删除
+                    </Button>
+                  </span>
+                );
+              }
+            }}
+            rowKey="id"
+          ></Table>
           <Pagination
             current={this.model.pagination.page}
             total={this.model.pagination.total}
             showQuickJumper
+            showSizeChanger
             hideOnSinglePage
             style={{ marginTop: "20px" }}
             pageSize={this.model.pagination.size}
             onChange={(page: number, pageSize: number) => {
+              this.presenter.handlePageChange(page, pageSize);
+            }}
+            onShowSizeChange={(page: number, pageSize: number) => {
               this.presenter.handlePageChange(page, pageSize);
             }}
           />

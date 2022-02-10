@@ -13,11 +13,7 @@ const props = {
   visible: Boolean,
   action: String as PropType<"create" | "edit">,
   title: String as PropType<"创建" | "编辑">,
-  onCancel: {
-    type: Function as PropType<() => void>,
-    default: () => {},
-    required: true
-  },
+  onCancel: Function as PropType<() => void>,
   onOk: Function as PropType<() => void>,
   data: Object as PropType<Model["data"]>
 };
@@ -43,14 +39,12 @@ const EditModal = defineComponent({
         okText="确定"
         cancelText="取消"
         onCancel={() => {
-          this.$props.onCancel();
+          this.$emit("cancel");
         }}
         onOk={() => {
           this.presenter.handleSubmit();
         }}
-        okButtonProps={{
-          loading: this.model.loading
-        }}
+        confirmLoading={this.model.loading}
       >
         <div>
           <Form labelCol={{ span: 4 }} wrapperCol={{ span: 16 }}>
@@ -110,4 +104,4 @@ const EditModal = defineComponent({
     );
   }
 });
-export default tsx.ofType<Props>().convert(observer(EditModal));
+export default observer(EditModal);

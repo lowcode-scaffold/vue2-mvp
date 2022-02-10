@@ -1,4 +1,4 @@
-import { watch } from "@vue/composition-api";
+import { watch, getCurrentInstance } from "@vue/composition-api";
 import { message } from "ant-design-vue";
 import { Props } from ".";
 import { createModel } from "./model";
@@ -7,7 +7,7 @@ import Service from "./service";
 const usePresenter = (props: Props) => {
   const model = createModel();
   const service = new Service(model);
-
+  const instance = getCurrentInstance();
   watch(
     () => props.visible,
     () => {
@@ -32,9 +32,8 @@ const usePresenter = (props: Props) => {
     } else {
       service.editUser().then(() => {
         message.success("提交成功");
-        if (props.onOk) {
-          props.onOk();
-        }
+        console.log(getCurrentInstance());
+        instance?.emit("ok");
       });
     }
   };
