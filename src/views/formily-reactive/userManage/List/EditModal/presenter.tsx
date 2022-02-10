@@ -32,7 +32,6 @@ const usePresenter = (props: Props) => {
     } else {
       service.editUser().then(() => {
         message.success("提交成功");
-        console.log(getCurrentInstance());
         instance?.emit("ok");
       });
     }
