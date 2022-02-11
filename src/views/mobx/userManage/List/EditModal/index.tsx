@@ -6,7 +6,7 @@ import {
 import { Modal, Form, Input, Select } from "ant-design-vue";
 import usePresenter from "./presenter";
 import Model from "./model";
-import { observer } from "@formily/reactive-vue";
+import { observer } from "@/mobx-vue";
 import * as tsx from "vue-tsx-support";
 
 const props = {

@@ -23,6 +23,18 @@ const routes: Array<RouteConfig> = [
       import(
         /* webpackChunkName: "formily" */ "../views/formily-reactive/userManage/List"
       )
+  },
+  {
+    path: "/mobx",
+    name: "mobx",
+    component: () =>
+      import(/* webpackChunkName: "formily" */ "../views/mobx/userManage/List")
+  },
+  {
+    path: "/vue",
+    name: "vue",
+    component: () =>
+      import(/* webpackChunkName: "formily" */ "../views/vue/userManage/List")
   }
 ];
 

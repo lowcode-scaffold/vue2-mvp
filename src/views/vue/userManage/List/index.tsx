@@ -13,8 +13,7 @@ import usePresenter from "./presenter";
 import styles from "./index.module.scss";
 import EditModal from "./EditModal";
 import { action } from "@formily/reactive";
-//import { observer } from "@formily/reactive-vue";
-import { observer } from "@/reactive-vue/observer";
+import { observer } from "@formily/reactive-vue";
 import { Column } from "ant-design-vue/types/table/column";
 import { AntdComponent } from "ant-design-vue/types/component";
 
@@ -69,7 +68,7 @@ const Index = defineComponent({
           <div class={styles.filter}>
             <Row gutter={[20, 0]}>
               <Col span={8}>
-                <Form.Item label="名称">
+                <Form.Item label="名称" labelAlign="left">
                   <Input
                     value={this.model.filterForm.name}
                     placeholder="输入名称搜索"
@@ -112,7 +111,7 @@ const Index = defineComponent({
           <Table
             columns={this.culumns}
             dataSource={this.model.userList}
-            loading={this.model.loading}
+            loading={this.model.loading.value}
             pagination={false}
             scopedSlots={{
               tags: (value: string[]) => {

@@ -12,11 +12,10 @@ import {
 import usePresenter from "./presenter";
 import styles from "./index.module.scss";
 import EditModal from "./EditModal";
-import { action } from "@formily/reactive";
-//import { observer } from "@formily/reactive-vue";
-import { observer } from "@/reactive-vue/observer";
+import { observer } from "@/mobx-vue";
 import { Column } from "ant-design-vue/types/table/column";
 import { AntdComponent } from "ant-design-vue/types/component";
+import { runInAction } from "mobx";
 
 const Index = defineComponent({
   setup() {
@@ -96,7 +95,7 @@ const Index = defineComponent({
                   style={{ marginLeft: "10px" }}
                   type="primary"
                   onClick={() => {
-                    action(() => {
+                    runInAction(() => {
                       this.model.modalInfo.visible = true;
                       this.model.modalInfo.title = "创建";
                       this.model.modalInfo.data = undefined;
@@ -172,12 +171,12 @@ const Index = defineComponent({
           data={this.model.modalInfo.data}
           title={this.model.modalInfo.title}
           onCancel={() => {
-            action(() => {
+            runInAction(() => {
               this.model.modalInfo.visible = false;
             });
           }}
           onOk={() => {
-            action(() => {
+            runInAction(() => {
               this.model.modalInfo.visible = false;
             });
             this.presenter.refresh();

@@ -5,7 +5,7 @@ import {
 } from "@vue/composition-api";
 import { Modal, Form, Input, Select } from "ant-design-vue";
 import usePresenter from "./presenter";
-import Model from "./model";
+import { Model } from "./model";
 import { observer } from "@formily/reactive-vue";
 import * as tsx from "vue-tsx-support";
 
@@ -44,7 +44,7 @@ const EditModal = defineComponent({
         onOk={() => {
           this.presenter.handleSubmit();
         }}
-        confirmLoading={this.model.loading}
+        confirmLoading={this.model.loading.value}
       >
         <div>
           <Form labelCol={{ span: 4 }} wrapperCol={{ span: 16 }}>
