@@ -9,14 +9,6 @@ const routes: Array<RouteConfig> = [
     redirect: "/formily"
   },
   {
-    path: "/demo/composition-api",
-    name: "composition-api",
-    component: () =>
-      import(
-        /* webpackChunkName: "composition-api" */ "../views/demo/composition-api/SimpleComponent"
-      )
-  },
-  {
     path: "/formily",
     name: "formily",
     component: () =>
