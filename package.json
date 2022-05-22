@@ -3,8 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"serve": "vue-cli-service serve",
-		"build": "vue-cli-service build",
+		"serve": "vue-cli-service serve --mode development",
+		"build": "vue-cli-service build --mode production",
 		"test:unit": "vue-cli-service test:unit",
 		"test:e2e": "vue-cli-service test:e2e",
 		"lint": "vue-cli-service lint"
@@ -12,7 +12,7 @@
 	"dependencies": {
 		"@formily/reactive": "^2.0.9",
 		"@formily/reactive-vue": "^2.0.9",
-		"@vue/composition-api": "^1.4.6",
+		"@vue/composition-api": "^1.6.0",
 		"ant-design-vue": "1.7.8",
 		"axios": "^0.25.0",
 		"core-js": "^3.6.5",
