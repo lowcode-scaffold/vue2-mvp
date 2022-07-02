@@ -11,14 +11,14 @@ export default class Service {
   init(data: Model["data"]) {
     this.model.data = (data && JSON.parse(JSON.stringify(data))) || defaultData; //需要深拷贝
     if (data && data.tags) {
-      this.model.tagOptions = data.tags.map(s => {
+      this.model.tagOptions.value = data.tags.map(s => {
         return {
           label: s,
           value: s
         };
       });
     } else {
-      this.model.tagOptions = [];
+      this.model.tagOptions.value = [];
     }
   }
 

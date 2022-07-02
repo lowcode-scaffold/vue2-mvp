@@ -1,19 +1,15 @@
-import {
-  defineComponent,
-  PropType,
-  ExtractPropTypes
-} from "@vue/composition-api";
+import { defineComponent, PropType, ExtractPropTypes } from "vue";
 import { Modal, Form, Input, Select } from "ant-design-vue";
 import usePresenter from "./presenter";
 import { Model } from "./model";
-import { observer } from "@formily/reactive-vue";
-import * as tsx from "vue-tsx-support";
 
 const props = {
   visible: Boolean,
   action: String as PropType<"create" | "edit">,
   title: String as PropType<"创建" | "编辑">,
-  onCancel: Function as PropType<() => void>,
+  onCancel: {
+    type: Function as PropType<() => void>
+  },
   onOk: Function as PropType<() => void>,
   data: Object as PropType<Model["data"]>
 };
@@ -22,8 +18,9 @@ export type Props = ExtractPropTypes<typeof props>;
 
 const EditModal = defineComponent({
   props: props,
-  setup(props) {
-    const presenter = usePresenter(props);
+  setup(_props) {
+    console.log(_props);
+    const presenter = usePresenter(_props);
     const { model } = presenter;
 
     return {
@@ -82,7 +79,7 @@ const EditModal = defineComponent({
               <Select
                 mode="tags"
                 value={this.model.data?.tags}
-                options={this.model.tagOptions}
+                options={this.model.tagOptions.value}
                 onChange={(value: any) => {
                   this.presenter.handleFormChange("tags", value);
                 }}
@@ -104,4 +101,4 @@ const EditModal = defineComponent({
     );
   }
 });
-export default tsx.ofType<Props>().convert(observer(EditModal));
+export default EditModal;

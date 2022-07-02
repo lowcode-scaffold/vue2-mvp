@@ -1,9 +1,9 @@
-import { reactive, ref } from "@vue/composition-api";
+import { reactive, ref } from "vue";
 import { IFetchUserListResult } from "./api";
 
 export const useModel = () => {
   const filterForm = reactive({ name: "" });
-  const userList = reactive<IFetchUserListResult["result"]["rows"]>([]);
+  const userList = ref<IFetchUserListResult["result"]["rows"]>([]);
   const pagination = reactive({
     size: 10,
     page: 1,

@@ -12,16 +12,16 @@ export default class Service {
     if (this.model.loading.value) {
       return;
     }
-    this.model.loading.value = true;
+    // this.model.loading.value = true;
     const res = await fetchUserList({
       page: this.model.pagination.page,
       size: this.model.pagination.size,
       name: this.model.filterForm.name
     }).catch(() => {});
     if (res) {
-      this.model.userList = res.result.rows;
+      this.model.userList.value = res.result.rows;
       this.model.pagination.total = res.result.total;
-      this.model.loading.value = false;
+      // this.model.loading.value = false;
     }
   }
 

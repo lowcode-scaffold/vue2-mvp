@@ -39,3 +39,7 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+h 问题
+
+> "target": "esnext"

@@ -1,4 +1,4 @@
-import { reactive, ref } from "@vue/composition-api";
+import { reactive, ref } from "vue";
 import { IFetchUserListResult } from "../api";
 
 export const defaultData = {
@@ -15,7 +15,7 @@ export const useModel = () => {
     defaultData as any
   );
 
-  const tagOptions = reactive<{ label: string; value: string }[]>([]);
+  const tagOptions = ref<{ label: string; value: string }[]>([]);
 
   const loading = ref(false);
 

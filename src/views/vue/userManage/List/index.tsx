@@ -1,4 +1,4 @@
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent } from "vue";
 import {
   Table,
   Pagination,
@@ -12,8 +12,6 @@ import {
 import usePresenter from "./presenter";
 import styles from "./index.module.scss";
 import EditModal from "./EditModal";
-import { action } from "@formily/reactive";
-import { observer } from "@formily/reactive-vue";
 import { Column } from "ant-design-vue/types/table/column";
 import { AntdComponent } from "ant-design-vue/types/component";
 
@@ -95,11 +93,9 @@ const Index = defineComponent({
                   style={{ marginLeft: "10px" }}
                   type="primary"
                   onClick={() => {
-                    action(() => {
-                      this.model.modalInfo.visible = true;
-                      this.model.modalInfo.title = "创建";
-                      this.model.modalInfo.data = undefined;
-                    });
+                    this.model.modalInfo.visible = true;
+                    this.model.modalInfo.title = "创建";
+                    this.model.modalInfo.data = undefined;
                   }}
                   icon="plus"
                 >
@@ -110,7 +106,7 @@ const Index = defineComponent({
           </div>
           <Table
             columns={this.culumns}
-            dataSource={this.model.userList}
+            dataSource={this.model.userList.value}
             loading={this.model.loading.value}
             pagination={false}
             scopedSlots={{
@@ -171,14 +167,10 @@ const Index = defineComponent({
           data={this.model.modalInfo.data}
           title={this.model.modalInfo.title}
           onCancel={() => {
-            action(() => {
-              this.model.modalInfo.visible = false;
-            });
+            this.model.modalInfo.visible = false;
           }}
           onOk={() => {
-            action(() => {
-              this.model.modalInfo.visible = false;
-            });
+            this.model.modalInfo.visible = false;
             this.presenter.refresh();
           }}
         />
@@ -186,4 +178,4 @@ const Index = defineComponent({
     );
   }
 });
-export default observer(Index);
+export default Index;

@@ -1,13 +1,8 @@
-import {
-  defineComponent,
-  PropType,
-  ExtractPropTypes
-} from "@vue/composition-api";
+import { defineComponent, PropType, ExtractPropTypes } from "vue";
 import { Modal, Form, Input, Select } from "ant-design-vue";
 import usePresenter from "./presenter";
 import Model from "./model";
 import { observer } from "@/mobx-vue";
-import * as tsx from "vue-tsx-support";
 
 const props = {
   visible: Boolean,
@@ -104,4 +99,4 @@ const EditModal = defineComponent({
     );
   }
 });
-export default tsx.ofType<Props>().convert(observer(EditModal));
+export default observer(EditModal);

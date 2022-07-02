@@ -1,4 +1,4 @@
-import { watch, getCurrentInstance } from "@vue/composition-api";
+import { watch, getCurrentInstance } from "vue";
 import { message } from "ant-design-vue";
 import { Props } from ".";
 import { createModel } from "./model";
@@ -32,7 +32,7 @@ const usePresenter = (props: Props) => {
     } else {
       service.editUser().then(() => {
         message.success("提交成功");
-        instance?.emit("ok");
+        instance?.proxy.$emit("ok");
       });
     }
   };

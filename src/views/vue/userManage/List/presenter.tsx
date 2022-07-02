@@ -1,4 +1,4 @@
-import { watch } from "@vue/composition-api";
+import { watch } from "vue";
 import { message, Modal } from "ant-design-vue";
 import { IFetchUserListResult } from "./api";
 import Service from "./service";
